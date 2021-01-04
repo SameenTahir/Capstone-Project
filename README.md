@@ -25,6 +25,8 @@ Once this has been done we have access to the following star-schema based data m
 | Dim_Airport_Codes    | dimension table stores information about airport on which immigration flights land
 | Dim_Visa_Type        | dimension table contains information abour visa type of people immigrating to the US.
 
+![alt text](https://github.com/SameenTahir/Capstone-Project/blob/main/DataModel.jpg)
+
 Note: The data dictionary (c.f. `DATADICT.md`) contains a description of every attribute for all tables listed above.
 
 ### Handling scenarios
