@@ -8,6 +8,7 @@ As the final project of the Udacity Data Engineering Nano-degree, we’re tasked
 ## Dataset
 
 -I94 Immigration Data: This data comes from the US National Tourism and Trade Office.It comes from here [Immigration Data](https://travel.trade.gov/research/reports/i94/historical/2016.html)
+
 -Airport Code Table: This is a simple table of airport codes and corresponding cities. It comes from here [Airport Data](https://datahub.io/core/airport-codes#data)
 
 ### Implementation details
@@ -65,13 +66,5 @@ table.
 
 ## Usage
 1. Double check that you meet all prerequisites specified above
-2. Create a dedicated Python environment using conda via `conda env create -f capstone_env.yml` 
-and activate it via `conda actiate udacity-dend`
-3. Edit `app.cfg` and enter your information in the corresponding sections (aws, twitter, etc.)  
-4. Get the [world happiness](https://www.kaggle.com/unsdsn/world-happiness#2017.csv) and 
-[earth temperature](https://www.kaggle.com/berkeleyearth climate-change-earth-surface-temperature-data#GlobalLandTemperaturesByCountry.csv) datasets from Kaggle and save them to the data directory in this repository
-5. Search or stream some tweets by running either `python search_tweets.py` or `python stream_tweets.py`
-6. Verify that the capstone_dag has been correctly parsed by Airflow via `airflow list_tasks capstone_dag --tree`
-7. Trigger a DAG run via `airflow trigger_dag capstone_dag`. If just want to run a specific task do so via
-`airflow run -i capstone_dag<task_id>`
-8. Have fun analyzing the data
+2. Trigger a DAG .
+3. Have fun analyzing the data
