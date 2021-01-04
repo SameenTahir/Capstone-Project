@@ -68,5 +68,5 @@ table.
 
 ## Usage
 1. Double check that you meet all prerequisites specified above
-2. Trigger a DAG .
+2. Trigger a DAG run via `airflow trigger_dag capstone_dag`
 3. Have fun analyzing the data
