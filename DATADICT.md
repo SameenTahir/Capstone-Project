@@ -35,6 +35,10 @@ This file contains an overview of the attributes (columns), types and descriptio
 |gender	|varchar(256)
 |insnum	|varchar(256)
 |airline	|varchar(256)
+|admnum	|varchar(256)
+|fltno	|varchar(256)
+|visatype|	varchar(256)
+
 
 | Column         | Type      | Description |
 | -------------- | --------- | ----------------------------------------------------
