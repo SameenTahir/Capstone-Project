@@ -1,1 +1,77 @@
-# Capstone-Project
+# Capstone project
+
+## Introduction
+As the final project of the Udacity Data Engineering Nano-degree, we’re tasked with demonstrating the knowledge we’ve gathered regarding Data Modeling, AWS, Data lakes, Spark and Data pipelines using airflow by combining all these components to come up with a data engineering solution. For this purpose, we can either choose a dataset from the list of provided datasets for the project or pick one online and scope it. I’m going with the former option by picking the following two datasets:
+1.	Immigration_Data.csv
+2.	Airport_Codes.csv
+
+## Dataset
+
+-I94 Immigration Data: This data comes from the US National Tourism and Trade Office.It comes from here [Immigration Data](https://travel.trade.gov/research/reports/i94/historical/2016.html)
+-Airport Code Table: This is a simple table of airport codes and corresponding cities. It comes from here [Airport Data](https://datahub.io/core/airport-codes#data)
+
+### Implementation details
+
+Since we need to store this dataset for further processing and as this data usually come in large quantities at fast speeds, we use [S3](https://aws.amazon.com/s3) before we finally stage it into [Redshift](https://aws.amazon.com/redshift). Since we do not want to run individual scripts to manually populate our data source, we use [Airflow](https://airflow.apache.org/) to create tablesin Redshift, stage data and derive fact and dimension tables.
+
+### Data Model
+Once this has been done we have access to the following star-schema based data model: 
+ 
+| Table                |                      Description                 |
+|----------------------|--------------------------------------------------|
+| Fact_Immigration_Data| Is a fact comprising primarily of the immigration_data file. It stores information about immigration flights to the US
+| Dim_Date_Hierarchy   | dimension table stores information about date,month, year etc 
+| Dim_Airport_Codes    | dimension table stores information about airport on which immigration flights land
+| Dim_Visa_Type        | dimension table contains information abour visa type of people immigrating to the US.
+
+Note: The data dictionary (c.f. `DATADICT.md`) contains a description of every attribute for all tables listed above.
+
+### Handling scenarios
+This section discusses strategies to deal with the following scenarios:
+1. Data is increased 100x  
+2. Data pipeline is run on daily basis by 7 am every day
+3. Database needs to be accessed by 100+ users simultaneously
+
+#### Data is increased 100x
+Since we decided to use scalable, fully managed cloud services to store and process our data, we might only need to  increase the available resources (e.g. number/CPU/RAM of Redshift nodes) to handle an increase in data volume.
+
+#### Data pipleline is run on a daily basis by 7 am every day
+As the static datasets do not change on a daily basis, the major challenge here, is to process the amount of newly 
+captured tourism data in an acceptable time. Fortunately, using AWS S3 makes it easy for us to schedule 
+data loads, for example via another dedicated Airflow dag. Given an appropriate increase in Redshift resources, this 
+should be sufficient to process data in time.
+
+#### Database needs to be accessed by 100+ users simultaneously
+Besides increasing Redshift resources as mentioned above, we could deal with an increase in users by precomputing the 
+most complicated (in terms of required processing power) and/or most desired queries and store them in an additional 
+table.
+
+## Prerequisites
+
+* AWS account with dedicated user including access key ID and secret access key
+* Access to AWS Comprehend
+* Access to a (running) AWS Redshift cluster, where access means:
+    - Having created an attached a security group allowing access on port 5439
+    - Having created an attached a role allowing Redshift to access buckets on AWS S3
+    - Create/drop/insert/update rights for the Redshift instance
+* Working installation of Airflow, where working means:
+    - Airflow web server and scheduler are running
+    - Connection to AWS is set up using `aws_default` ID
+    - Connection to Redshift is set up using `redshift_default` ID
+    - AWS IAM role is set up as Airflow variable using `aws_iam_role` as key
+* Unix-like environment (Linux, macOS, WSL on Windows)
+* Python 3.7+
+* Python packages boto3, airflow, etc.
+
+## Usage
+1. Double check that you meet all prerequisites specified above
+2. Create a dedicated Python environment using conda via `conda env create -f capstone_env.yml` 
+and activate it via `conda actiate udacity-dend`
+3. Edit `app.cfg` and enter your information in the corresponding sections (aws, twitter, etc.)  
+4. Get the [world happiness](https://www.kaggle.com/unsdsn/world-happiness#2017.csv) and 
+[earth temperature](https://www.kaggle.com/berkeleyearth climate-change-earth-surface-temperature-data#GlobalLandTemperaturesByCountry.csv) datasets from Kaggle and save them to the data directory in this repository
+5. Search or stream some tweets by running either `python search_tweets.py` or `python stream_tweets.py`
+6. Verify that the capstone_dag has been correctly parsed by Airflow via `airflow list_tasks capstone_dag --tree`
+7. Trigger a DAG run via `airflow trigger_dag capstone_dag`. If just want to run a specific task do so via
+`airflow run -i capstone_dag<task_id>`
+8. Have fun analyzing the data
