@@ -70,3 +70,5 @@ table.
 1. Double check that you meet all prerequisites specified above
 2. Trigger a DAG run via `airflow trigger_dag capstone_dag`
 3. Have fun analyzing the data
+
+![Alt text] (https://github.com/SameenTahir/Capstone-Project/blob/main/FlowDiagram.jpg)
