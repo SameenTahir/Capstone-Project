@@ -92,7 +92,7 @@ The below given flow-chart illustrates the data ingestion process:
 2. Trigger a DAG run via `airflow trigger_dag capstone_dag`
 3. Have fun analyzing the data
 
-####Data Processing & Analysis
+### Data Processing & Analysis
 
 For data processing and analysis sql queries have been used. These queries are called through the dags defined in the airflow pipeline process. Furthermore, attached below are some dashboards that have been developed using the insights generated from the data loaded through the pipeline explained here for the data model stated above:
 
