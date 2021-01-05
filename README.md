@@ -49,6 +49,23 @@ Besides increasing Redshift resources as mentioned above, we could deal with an 
 most complicated (in terms of required processing power) and/or most desired queries and store them in an additional 
 table.
 
+### Data Pipeline
+
+The Data pipeline is comprises of the below mentioned tasks:
+1.	Start Operator and End operator are tasks that start and end the dag. Both are dummy tasks
+2.	`Load_Immig_Data_into_Redshift` is a dag that will load immigration_data into the redshift database on the cluster
+3.	Similarly, `Load_Airport_Data_into_Redshift` is a dag that will load Airport data into redshift
+4.	To load the dimension and fact tables in the model following dag’s are used:
+
+        1.	load_fact_immigration_table
+        2.	load_airportcodes_dimension_table
+        3.	load_visatype_dimension_table
+        4.	load_date_hierarchy_dimension_table
+        
+5.	To run data quality checks against the data loaded `run_data_quality_checks` dag is used
+
+![alt text](https://github.com/SameenTahir/Capstone-Project/blob/main/FlowDiagram.jpg)
+
 ## Prerequisites
 
 * AWS account with dedicated user including access key ID and secret access key
@@ -71,4 +88,4 @@ table.
 2. Trigger a DAG run via `airflow trigger_dag capstone_dag`
 3. Have fun analyzing the data
 
-![alt text](https://github.com/SameenTahir/Capstone-Project/blob/main/FlowDiagram.jpg)
+
