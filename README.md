@@ -64,6 +64,10 @@ The Data pipeline is comprises of the below mentioned tasks:
         
 5.	To run data quality checks against the data loaded `run_data_quality_checks` dag is used
 
+### Ingestion
+
+The below given flow-chart illustrates the data ingestion process:
+
 ![alt text](https://github.com/SameenTahir/Capstone-Project/blob/main/FlowDiagram.jpg)
 
 ## Prerequisites
