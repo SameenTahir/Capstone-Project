@@ -13,7 +13,13 @@ As the final project of the Udacity Data Engineering Nano-degree, we’re tasked
 
 ### Implementation details
 
-Since we need to store this dataset for further processing and as this data usually come in large quantities at fast speeds, we use [S3](https://aws.amazon.com/s3) before we finally stage it into [Redshift](https://aws.amazon.com/redshift). Since we do not want to run individual scripts to manually populate our data source, we use [Airflow](https://airflow.apache.org/) to create tablesin Redshift, stage data and derive fact and dimension tables.
+The tools chosen for this project are as under:
+
+•	File Storage: Amazon S3 
+•	Data Storage: Amazon Redshift
+•	Orchestration Tool: Apache Airflow 
+
+Since we need to store this dataset for further processing and as this data usually come in large quantities at fast speeds, we use [S3](https://aws.amazon.com/s3) before we finally stage it into [Redshift](https://aws.amazon.com/redshift). Using the aforementioned AWS toolstack to process data is convenient in our case, since it can scale to large amounts of data/users easily and is fully managed. Since we do not want to run individual scripts to manually populate our data source, we use [Airflow](https://airflow.apache.org/) to create tables in Redshift, stage data and derive fact and dimension tables.
 
 ### Data Model
 Once this has been done we have access to the following star-schema based data model: 
@@ -29,7 +35,7 @@ Once this has been done we have access to the following star-schema based data m
 
 Note: The data dictionary (c.f. `DATADICT.md`) contains a description of every attribute for all tables listed above.
 
-By Using the data model above we can answer questions regarding relationships between immigrants, their visiting regions, airports, their gender, type of visas and chosen airlines for travelling,helping us to give meaningful insights.
+By Using the data model above we can answer questions regarding relationships between immigrants, their visiting regions, airports, their gender, type of visas and chosen airlines for travelling,helping us to give meaningful insights.The choice for using star-schema is based on its simple design and fast aggregations.It will help fast retrieval of data for extracting iimigration data for individuals and on-fly analysis. 
 
 ### Handling scenarios
 
