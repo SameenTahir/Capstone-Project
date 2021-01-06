@@ -29,20 +29,21 @@ Once this has been done we have access to the following star-schema based data m
 
 Note: The data dictionary (c.f. `DATADICT.md`) contains a description of every attribute for all tables listed above.
 
+By Using the data model above we can answer questions regarding relationships between immigrants, their visiting regions, airports, their gender, type of visas and chosen airlines for travelling,helping us to give meaningful insights.
+
 ### Handling scenarios
+
 This section discusses strategies to deal with the following scenarios:
 1. Data is increased 100x  
 2. Data pipeline is run on daily basis by 7 am every day
 3. Database needs to be accessed by 100+ users simultaneously
 
 #### Data is increased 100x
-Since we decided to use scalable, fully managed cloud services to store and process our data, we might only need to  increase the available resources (e.g. number/CPU/RAM of Redshift nodes) to handle an increase in data volume.
+Since we decided to use scalable, fully managed cloud services to store and process our data it woudnlt be a technical issue as Amazon tools are commonly used for processing large amount of datas.We might only need to  increase the available resources (e.g. number/CPU/RAM of Redshift nodes) to handle an increase in data volume. We can also deal with  increase in data by processing them individually to processing in batches. 
 
 #### Data pipleline is run on a daily basis by 7 am every day
 As the static datasets do not change on a daily basis, the major challenge here, is to process the amount of newly 
-captured tourism data in an acceptable time. Fortunately, using AWS S3 makes it easy for us to schedule 
-data loads, for example via another dedicated Airflow dag. Given an appropriate increase in Redshift resources, this 
-should be sufficient to process data in time.
+captured tourism data in an acceptable time. We have to tune dag definition in airflow a little to acheive this task.
 
 #### Database needs to be accessed by 100+ users simultaneously
 Besides increasing Redshift resources as mentioned above, we could deal with an increase in users by precomputing the 
