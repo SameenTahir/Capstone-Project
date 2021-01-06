@@ -35,7 +35,7 @@ Once this has been done we have access to the following star-schema based data m
 
 Note: The data dictionary (c.f. `DATADICT.md`) contains a description of every attribute for all tables listed above.
 
-By Using the data model above we can answer questions regarding relationships between immigrants, their visiting regions, airports, their gender, type of visas and chosen airlines for travelling,helping us to give meaningful insights.The choice for using star-schema is based on its simple design and fast aggregations.It will help fast retrieval of data for extracting iimigration data for individuals and on-fly analysis. 
+The choice for using star-schema is based on its simple design and fast aggregations.By Using the data model above fast retrieval of imigration data will be easier and we can answer questions regarding relationships between immigrants, their visiting regions, airports, their gender, type of visas and chosen airlines for travelling,helping us to give meaningful insights.
 
 ### Handling scenarios
 
